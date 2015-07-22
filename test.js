@@ -40,9 +40,21 @@ describe('failure', function () {
         , res = err.toJSON();
 
       assume(err.what).equals('why');
-      assume(res.what).is.undefined();
+      assume(res.what).is.equals('why');
       assume(res.statusCode).equals(200);
       assume(err.statusCode).equals(200);
+    });
+
+    it('includes properties that were previously specified on a given error', function () {
+      var err = new Error('fools')
+        , res;
+
+      err.warning = true;
+      res = failure(err, { what: 'lol' }).toJSON();
+
+      assume(res.what).equals('lol');
+      assume(res.warning).equals(true);
+      assume(res.message).equals('fools');
     });
 
     it('does not override existing toJSON functions', function () {

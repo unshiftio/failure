@@ -1,5 +1,7 @@
 'use strict';
 
+var has = Object.prototype.hasOwnProperty;
+
 /**
  * Return an object with all the information that should be in the JSON output.
  * It doesn't matter if we list keys that might not be in the err as the
@@ -10,12 +12,18 @@
  * @api public
  */
 function toJSON() {
-  return {
-    statusCode: this.statusCode,
-    message: this.message,
-    stack: this.stack,
-    type: this.type
-  };
+  var obj =  { message: this.message, stack: this.stack }, key;
+
+  for (key in this) {
+    if (
+         has.call(this, key)
+      && 'function' !== typeof this[key]
+    ) {
+      obj[key] = this[key];
+    }
+  }
+
+  return obj;
 }
 
 /**
