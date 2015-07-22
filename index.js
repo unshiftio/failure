@@ -39,7 +39,7 @@ module.exports = function failure(err, props) {
   if ('string' === typeof err) err = new Error(err);
 
   if (props) for (var prop in props) {
-    if (!(prop in err) && props.hasOwnProperty(prop)) {
+    if (!(prop in err) && has.call(props, prop)) {
       err[prop] = props[prop];
     }
   }

@@ -22,6 +22,19 @@ describe('failure', function () {
     assume(failure().message).includes('error');
   });
 
+  it('accepts Object.create(null)', function () {
+    var obj = Object.create(null)
+      , err;
+
+    obj.foo = 'bar';
+    obj.message = 'hi';
+
+    err = failure(new Error('what'), obj);
+
+    assume(err.message).equals('what');
+    assume(err.foo).equals('bar');
+  });
+
   describe('#toJSON', function () {
     it('adds the `toJSON` function', function () {
       assume(failure().toJSON).is.a('function');
