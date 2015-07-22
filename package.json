@@ -1,6 +1,6 @@
 {
   "name": "failure",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Easily generate \"custom\" error objects with addition properties which can be stringfied with JSON.stringify",
   "main": "index.js",
   "scripts": {
