@@ -1,6 +1,6 @@
 # failure
 
-[![Made by unshift][made-by]](http://unshift.io)[![Version npm][version]](http://browsenpm.org/package/failure)[![Build Status][build]](https://travis-ci.org/unshiftio/failure)[![Dependencies][david]](https://david-dm.org/unshiftio/failure)[![Coverage Status][cover]](https://coveralls.io/r/unshiftio/failure?branch=master)[![IRC channel][irc]](http://webchat.freenode.net/?channels=unshift)
+[![Made by unshift][made-by]](http://unshift.io)[![Version npm][version]](http://browsenpm.org/package/failure)[![Build Status][build]](https://travis-ci.org/unshiftio/failure)[![Dependencies][david]](https://david-dm.org/unshiftio/failure)[![Coverage Status][cover]](https://coveralls.io/r/unshiftio/failure?branch=master)[![IRC channel][irc]](https://webchat.freenode.net/?channels=unshift)
 
 [made-by]: https://img.shields.io/badge/made%20by-unshift-00ffcc.svg?style=flat-square
 [version]: https://img.shields.io/npm/v/failure.svg?style=flat-square
@@ -62,21 +62,21 @@ parse errors for JSON, you probably want to know what you received and failed.
 ```js
 request('https://googlllll.com', function (err, res, body) {
   if (err) return next(err);
-  if (res.statusCode !== 200) return next(failure('Invalid statusCode'), {
+  if (res.statusCode !== 200) return next(failure('Invalid statusCode', {
     statusCode: res.statusCode
-  });
+  }));
 
   try { body = JSON.parse(body); }
   catch (e) {
-    return next(failure(e, { 
-      body: body 
+    return next(failure(e, {
+      body: body
     }));
   }
 
   next(undefined, body);
-})
+});
 ```
 
 ## License
 
-MIT
+[MIT](LICENSE)
